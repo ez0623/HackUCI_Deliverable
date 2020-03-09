@@ -39,7 +39,7 @@ const Application = () => {
                 console.log(res)
             })
             .catch(err => {
-                toast.error('Successful Error!', {
+                toast.error('Submission Error!', {
                     position: 'top-center',
                     autoClose: 3000,
                     hideProgressBar: false,
