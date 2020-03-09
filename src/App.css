@@ -75,10 +75,14 @@
          grid-template-rows: 20vh auto 20vh;
      }
 
+     .App .button {
+         margin-top: 50px;
+     }
+
  }
 
  .form-control {
-     border-color: black;
+     border: 1px solid black !important;
  }
 
  .logo {

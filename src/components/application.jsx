@@ -1,38 +1,68 @@
 import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Application = () => {
     //form inputs
     const [formData, setFormData] = useState({
-        name: 'asdf',
-        email: 'asdf@asdf',
-        funfact: 'asdf'
+        name: '',
+        email: '',
+        funfact: ''
     })
     const { name, email, funfact } = formData
-    const onChange = i =>
+    const onChange = i => {
         setFormData({ ...formData, [i.target.name]: i.target.value })
+    }
 
-    const onSubmit = async e => {
-        try {
-            const res = await axios
-                .get('https://hack-uci-test-endpoint.herokuapp.com/test', {
-                    params: formData
+    const onSubmit = event => {
+        event.preventDefault()
+        axios
+            .get('https://hack-uci-test-endpoint.herokuapp.com/test', {
+                params: formData
+            })
+            .then(res => {
+                setFormData({
+                    name: '',
+                    email: '',
+                    funfact: ''
                 })
-                .then(
-                    setFormData({
-                        name: '',
-                        email: '',
-                        funfact: ''
-                    })
-                )
-            console.log(res.data)
-        } catch (err) {
-            console.log(err)
-        }
+                toast.success('Successful Submission!', {
+                    position: 'top-center',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false
+                })
+                console.log(res)
+            })
+            .catch(err => {
+                toast.error('Successful Error!', {
+                    position: 'top-center',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false
+                })
+                console.log(err)
+            })
     }
     return (
         <div className='App'>
+            <ToastContainer
+                position='top-center'
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnVisibilityChange={false}
+                draggable={false}
+                pauseOnHover={false}
+            />
             <Form className='form' onSubmit={i => onSubmit(i)}>
                 <h2>Hack UCI Application</h2>
                 <Form.Group className='form-group'>
@@ -49,11 +79,12 @@ const Application = () => {
                 <Form.Group className='form-group'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
-                        type='email'
+                        type='text'
                         placeholder='Email'
                         name='email'
                         value={email}
                         onChange={i => onChange(i)}
+                        pattern='^([A-Za-z0-9]+)@([A-Za-z0-9_\-\.]+)\.([A-Za-z]+)$'
                         required
                     />
                 </Form.Group>
