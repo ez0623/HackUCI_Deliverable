@@ -1,38 +1,102 @@
-.App {
-    text-align: center;
-}
+ .App {
+     grid-column: 1;
+     grid-row: 2;
+     background: #ffffff;
+     font-size: 17px;
+     padding: 15px 16px;
+     border-radius: 10px;
+     width: 350px;
+     max-width: 90vw;
+     box-shadow: 0px 0px 10px gray;
+     justify-self: center;
+     padding: 30px;
+ }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
+ .App h2 {
+     text-align: center;
+     font-size: 26px;
+     font-weight: bold;
+ }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-float infinite 2s alternate;
-    }
-}
+ .App label {
+     text-align: left;
+     font-size: 15px;
+     font-weight: bold;
+ }
 
-.App-header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
+ .App .button {
+     align-self: flex-end;
+     background:
+         rgba(255, 115, 104, 1);
+     border-radius: 28px;
+     border: 1px solid #ffffff;
+     color: #ffffff;
+     font-size: 17px;
+     padding: 5px 16px;
+     text-decoration: none;
+     margin-left: auto;
+     margin-right: 0;
+     display: block;
+ }
 
-.App-link {
-    color: #61dafb;
-}
+ .App .button:active {
+     position: relative;
+     top: 1px;
+ }
 
-@keyframes App-logo-float {
-    from {
-        transform: translateY(-25px);
-    }
+ .App-logo {
+     grid-column: 1;
+     grid-row: 4;
+     justify-self: center;
+     align-self: center;
+ }
 
-    to {
-        transform: translateY(25px);
-    }
-}
+ .container {
+     display: grid;
+     grid-template-columns: 1;
+     grid-template-rows: 50px auto 50px auto 50px;
+ }
+
+ @media (min-width: 900px) {
+     .App {
+         grid-column: 1;
+         grid-row: 2;
+         max-width: 450;
+     }
+
+     .App-logo {
+         grid-column: 3;
+         grid-row: 2;
+     }
+
+     .container {
+         display: grid;
+         grid-template-columns: 45% 10% 45%;
+         grid-template-rows: 20vh auto 20vh;
+     }
+
+ }
+
+ .form-control {
+     border-color: black;
+ }
+
+ .logo {
+     height: 40vmin;
+ }
+
+ @media (prefers-reduced-motion: no-preference) {
+     .App-logo {
+         animation: App-logo-float infinite 2s alternate;
+     }
+ }
+
+ @keyframes App-logo-float {
+     from {
+         transform: translateY(-25px);
+     }
+
+     to {
+         transform: translateY(25px);
+     }
+ }

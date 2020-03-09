@@ -5,34 +5,19 @@ import axios from 'axios'
 const Application = () => {
     //form inputs
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        funfact: ''
+        name: 'asdf',
+        email: 'asdf@asdf',
+        funfact: 'asdf'
     })
-    //form validation
-    const [validated, setValidated] = useState(false)
-
     const { name, email, funfact } = formData
-    //getting data from form
     const onChange = i =>
         setFormData({ ...formData, [i.target.name]: i.target.value })
-    //submition
+
     const onSubmit = async e => {
-        const form = e.currentTarget
-        //check if inputs are valid
-        if (form.checkValidity() === false) {
-            e.preventDefault()
-            e.stopPropagation()
-        }
-        setValidated(false)
         try {
             const res = await axios
                 .get('https://hack-uci-test-endpoint.herokuapp.com/test', {
-                    params: {
-                        name,
-                        email,
-                        funfact
-                    }
+                    params: formData
                 })
                 .then(
                     setFormData({
@@ -48,17 +33,9 @@ const Application = () => {
     }
     return (
         <div className='App'>
-            <h1>Hack UCI Application</h1>
-            <Form
-                noValidate
-                validated={validated}
-                className='form'
-                onSubmit={i => onSubmit(i)}
-            >
-                <Form.Group
-                    controlId='validationCustom01'
-                    className='form-group'
-                >
+            <Form className='form' onSubmit={i => onSubmit(i)}>
+                <h2>Hack UCI Application</h2>
+                <Form.Group className='form-group'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         type='text'
@@ -68,15 +45,8 @@ const Application = () => {
                         onChange={i => onChange(i)}
                         required
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type='invalid'>
-                        Please enter a name.
-                    </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group
-                    controlId='validationCustom02'
-                    className='form-group'
-                >
+                <Form.Group className='form-group'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         type='email'
@@ -86,10 +56,6 @@ const Application = () => {
                         onChange={i => onChange(i)}
                         required
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type='invalid'>
-                        Please enter a valid email.
-                    </Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group className='form-group'>
                     <Form.Label>Fun Fact</Form.Label>
@@ -103,14 +69,10 @@ const Application = () => {
                         onChange={i => onChange(i)}
                         required
                     />
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                    <Form.Control.Feedback type='invalid'>
-                        Please enter a fact.
-                    </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant='primary' type='submit'>
+                <button className='button' type='submit'>
                     Submit
-                </Button>
+                </button>
             </Form>
         </div>
     )
